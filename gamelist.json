@@ -1,0 +1,41 @@
+{
+    "games": {
+        "Geometry Dash": "/games/geo/index.html",
+        "Caseoh's Basics": "/gamefile/caseoh.html",
+        "Baldi's Basics": "/games/baldis-basics/index.html",
+        "Jeffy's Basics": "/games/JeffysBasicsBog/index.html",
+        "Minecraft": "/games/eglar/1dot12dot2/index.html",
+        "New super Mario bros": "/games/nsmb/index.html",
+        "The Impossible Quiz": "/games/theimpossiblequiz/index.html",
+        "There is no game": "/games/there-is-no-game/index.html",
+        "Super Mario 64": "/games/sm64/index.html",
+        "Sonic 4": "/games/sonic4/index.html",
+        "Subway Surfers": "/games/subway-surfers/index.html",
+        "Undertale": "/gamefile/undertale.html",
+        "The worlds hardest game": "/gamefile/twhg.html",
+        "Raldi's crackhouse": "/games/raldi/index.html",
+        "Fruit Ninga": "/games/fruitninja/index.html",
+        "Eggy Car": "/gamefile/eggycar.html",
+        "Duck life 1": "/games/ducklife1/index.html",
+        "Crossy road": "/gamefile/crossy.html",
+        "-3": "/games/minus3/index.html",
+        "-Bog": "/games/minusbog/index.html",
+        "Angry birds": "/gamefile/Angrybirds.html",
+        "Bloxors": "/games/bloxors/index.html",
+        "Balloons TD 3": "/games/btd3/index.html",
+        "Coockie Clicker": "/games/cookie-clicker/index.html",
+        "Cut the rope": "/gamefile/cut.html",
+        "Five nights at Freddy's": "/games/fnaf/index.html",
+        "GTA San Andreas": "/games/gtasan/index.html",
+        "Kick the buddy": "/games/kickthebuddy/index.html",
+        "Level devil": "/games/lvldevil/index.html",
+        "Lethal company": "/games/lethal/index.html",
+        "Mario kart 64": "/games/mk64/index.html",
+        "Stickman hook": "/games/stickman-hook/"
+    },
+    "urls": {
+        "garbsoftball.com": "https:/garbsoftball.com",
+        "truffled.lol": "https:/truffled.lol",
+        "crackstuff.pages.dev": "https:/crackstuff.pages.dev"
+    }
+}

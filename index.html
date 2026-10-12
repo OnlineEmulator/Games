@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free games</title>
+</head>
+<body>
+    <div>
+        <select id="games"></select>
+        <select id="urls"></select>
+    </div>
+    <button onclick="playgame()">Play</button>
+    <button onclick="enterfullscreen()">Fullscreen</button>
+    <button onclick="exitfullscreen()" id="exit" style="position: fixed; top: 10px; right: 10px; display: none;">Exit   </button>
+    <br>
+    <iframe credentialless id="player" width="750" height="500"></iframe>
+    <script>
+        async function playgame() {
+            document.getElementById('player').src = document.getElementById('urls').value + document.getElementById('games').value
+        }
+
+        let originalState;
+
+        async function enterfullscreen() {
+            const player = document.getElementById('player');
+            const exit = document.getElementById('exit');
+
+            if (originalState) return;
+
+            originalState = {
+                width: player.getAttribute('width'),
+                height: player.getAttribute('height'),
+                playerStyle: player.getAttribute('style'),
+                exitStyle: exit.getAttribute('style'),
+                bodyStyle: document.body.getAttribute('style'),
+                htmlStyle: document.documentElement.getAttribute('style'),
+                elements: [...document.querySelectorAll('body *')].map(element => ({
+                    element: element,
+                    display: element.style.display
+                }))
+            };
+
+            player.width = window.innerWidth;
+            player.height = window.innerHeight;
+
+            player.style.margin = "0";
+            player.style.border = "none";
+            player.style.padding = "0";
+            player.style.display = "block";
+
+            document.body.style.overflow = "hidden";
+            document.documentElement.style.overflow = "hidden";
+            document.body.style.margin = "0";
+            document.body.style.padding = "0";
+
+            document.querySelectorAll('body *').forEach(element => {
+                if (
+                    element !== player &&
+                    !player.contains(element) &&
+                    element !== exit &&
+                    !exit.contains(element)
+                ) {
+                    element.style.display = 'none';
+                }
+            });
+
+            player.style.display = "block";
+            exit.style.display = "block";
+        }
+
+        function exitfullscreen() {
+            if (!originalState) return;
+
+            const player = document.getElementById('player');
+            const exit = document.getElementById('exit');
+
+            if (originalState.width === null) {
+                player.removeAttribute('width');
+            } else {
+                player.setAttribute('width', originalState.width);
+            }
+
+            if (originalState.height === null) {
+                player.removeAttribute('height');
+            } else {
+                player.setAttribute('height', originalState.height);
+            }
+
+            if (originalState.playerStyle === null) {
+                player.removeAttribute('style');
+            } else {
+                player.setAttribute('style', originalState.playerStyle);
+            }
+
+            if (originalState.exitStyle === null) {
+                exit.removeAttribute('style');
+            } else {
+                exit.setAttribute('style', originalState.exitStyle);
+            }
+
+            if (originalState.bodyStyle === null) {
+                document.body.removeAttribute('style');
+            } else {
+                document.body.setAttribute('style', originalState.bodyStyle);
+            }
+
+            if (originalState.htmlStyle === null) {
+                document.documentElement.removeAttribute('style');
+            } else {
+                document.documentElement.setAttribute('style', originalState.htmlStyle);
+            }
+
+            originalState.elements.forEach(({ element, display }) => {
+                element.style.display = display;
+            });
+
+            exit.style.display = "none";
+
+            originalState = null;
+        }
+
+        window.addEventListener('resize', () => {
+            if (!originalState) return;
+
+            document.getElementById('player').width = window.innerWidth;
+            document.getElementById('player').height = window.innerHeight;
+        });
+
+        async function e() {
+            const response = await fetch("gamelist.json");
+            const data = await response.json();
+
+            for (const [key, value] of Object.entries(data)) {
+                const jsonthing = value
+                for (const [key2, value2] of Object.entries(jsonthing)) {
+                    const optionelement = document.createElement("option")
+                    optionelement.innerHTML = key2
+                    optionelement.value = value2
+                    document.getElementById(key).appendChild(optionelement)
+                }  
+            }
+        }
+
+        e()
+    </script>
+</body>
+</html>
