@@ -17,7 +17,9 @@
     <iframe credentialless id="player" width="750" height="500"></iframe>
     <script>
         async function playgame() {
-            document.getElementById('player').src = document.getElementById('urls').value + document.getElementById('games').value
+           document.getElementById('player').src =
+                document.getElementById('urls').value.replace(/\\:/g, ':') +
+                document.getElementById('games').value;
         }
 
         let originalState;
