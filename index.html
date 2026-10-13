@@ -17,9 +17,12 @@
     <iframe credentialless id="player" width="750" height="500"></iframe>
     <script>
         async function playgame() {
-           document.getElementById('player').src =
-                document.getElementById('urls').value.replace(/\\:/g, ':') +
-                document.getElementById('games').value;
+            const url = document.getElementById('urls').value
+                .replace(/^https?:\/?\/?/, match => match.replace(/\//g, '') + '//')
+                .replace(/\\/g, '/');
+
+            document.getElementById('player').src =
+                url + document.getElementById('games').value;
         }
 
         let originalState;
